@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">submission_intermediate_1</string>
+    <string name="app_name">Submission Android Intermediate</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

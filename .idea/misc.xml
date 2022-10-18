@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/submission_intermediate_1/app/src/main/res/drawable/bg_button_disable.xml" value="0.1225" />
+        <entry key="..\:/AndroidStudioProjects/submission_intermediate_1/app/src/main/res/drawable/bg_button_disabled.xml" value="0.1225" />
+        <entry key="..\:/AndroidStudioProjects/submission_intermediate_1/app/src/main/res/drawable/bg_button_enabled.xml" value="0.1225" />
+        <entry key="..\:/AndroidStudioProjects/submission_intermediate_1/app/src/main/res/drawable/bg_edit_text.xml" value="0.1225" />
+        <entry key="..\:/AndroidStudioProjects/submission_intermediate_1/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/submission_intermediate_1/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.19610507246376813" />
       </map>
