@@ -45,6 +45,7 @@ class CustomButton: AppCompatButton {
         setTextColor(txtColor)
         gravity = Gravity.CENTER
         isAllCaps = false
+        letterSpacing = 0.1f
     }
 
 }
