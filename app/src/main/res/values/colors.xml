@@ -15,4 +15,5 @@
     <color name="color_grey">#EAEAEA</color>
     <color name="color_dark_grey">#6D8299</color>
     <color name="color_black">#1B2430</color>
+    <color name="color_black_transparent">#401B2430</color>
 </resources>

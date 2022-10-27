@@ -23,12 +23,16 @@ class AuthViewModel: ViewModel() {
 
     fun login(email: String, password: String) {
         try {
+            loginData.value = null
             val userLoginData = UserModel(email = email, password = password)
             val service = ApiConfig.getApiService().login(userLoginData)
             service.enqueue(object : Callback<LoginResponse>{
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     if (response.isSuccessful) {
                         loginData.postValue(response.body())
+                    }
+                    else if (response.code() == 401) {
+                        loginData.postValue(LoginResponse(error = true, message = "Wrong email or password"))
                     }
                     else {
                         loginData.postValue(LoginResponse(error = true, message = "error get data"))
@@ -51,6 +55,7 @@ class AuthViewModel: ViewModel() {
 
     fun register(name: String, email: String, password:String) {
         try {
+            registerData.value = null
             val userRegisterData = UserModel(name, email, password)
             val service = ApiConfig.getApiService().register(userRegisterData)
             service.enqueue(object : Callback<RegisterResponse>{
@@ -60,6 +65,9 @@ class AuthViewModel: ViewModel() {
                 ) {
                     if (response.isSuccessful) {
                         registerData.postValue(response.body())
+                    }
+                    else if (response.code() == 400) {
+                        registerData.postValue(RegisterResponse(error = true, "Email is already taken"))
                     }
                     else {
                         registerData.postValue(RegisterResponse(error = true, "error get data"))
