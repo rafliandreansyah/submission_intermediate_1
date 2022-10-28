@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.submission_intermediate_1.api.ApiConfig
 import com.dicoding.submission_intermediate_1.model.LoginResponse
-import com.dicoding.submission_intermediate_1.model.RegisterResponse
+import com.dicoding.submission_intermediate_1.model.ResponseGeneral
 import com.dicoding.submission_intermediate_1.model.UserModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,8 +17,8 @@ class AuthViewModel: ViewModel() {
         MutableLiveData<LoginResponse>()
     }
 
-    val registerData: MutableLiveData<RegisterResponse> by lazy {
-        MutableLiveData<RegisterResponse>()
+    val registerData: MutableLiveData<ResponseGeneral> by lazy {
+        MutableLiveData<ResponseGeneral>()
     }
 
     fun login(email: String, password: String) {
@@ -58,33 +58,33 @@ class AuthViewModel: ViewModel() {
             registerData.value = null
             val userRegisterData = UserModel(name, email, password)
             val service = ApiConfig.getApiService().register(userRegisterData)
-            service.enqueue(object : Callback<RegisterResponse>{
+            service.enqueue(object : Callback<ResponseGeneral>{
                 override fun onResponse(
-                    call: Call<RegisterResponse>,
-                    response: Response<RegisterResponse>
+                    call: Call<ResponseGeneral>,
+                    response: Response<ResponseGeneral>
                 ) {
                     if (response.isSuccessful) {
                         registerData.postValue(response.body())
                     }
                     else if (response.code() == 400) {
-                        registerData.postValue(RegisterResponse(error = true, "Email is already taken"))
+                        registerData.postValue(ResponseGeneral(error = true, "Email is already taken"))
                     }
                     else {
-                        registerData.postValue(RegisterResponse(error = true, "error get data"))
+                        registerData.postValue(ResponseGeneral(error = true, "error get data"))
 
                     }
                 }
 
-                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseGeneral>, t: Throwable) {
                     t.printStackTrace()
-                    registerData.postValue(RegisterResponse(error = true, "error get data"))
+                    registerData.postValue(ResponseGeneral(error = true, "error get data"))
 
                 }
 
             })
         }catch (e: Exception) {
             e.printStackTrace()
-            registerData.postValue(RegisterResponse(error = true, "error get data"))
+            registerData.postValue(ResponseGeneral(error = true, "error get data"))
 
         }
     }
