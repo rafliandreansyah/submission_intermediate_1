@@ -1,14 +1,20 @@
 package com.dicoding.submission_intermediate_1.ui.story
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.submission_intermediate_1.databinding.ActivityListStoryBinding
+import com.dicoding.submission_intermediate_1.model.Story
+import com.dicoding.submission_intermediate_1.ui.auth.LoginActivity
+import com.dicoding.submission_intermediate_1.ui.story.adapter.StoryAdapter
+import com.dicoding.submission_intermediate_1.ui.story.viewmodel.StoryViewModel
 
 class ListStoryActivity : AppCompatActivity() {
 
@@ -34,6 +40,15 @@ class ListStoryActivity : AppCompatActivity() {
             isLoading(true)
             storyViewModel.getAllStory()
         }
+
+        storyAdapter.setOnItemClicked(object : StoryAdapter.OnItemClickListener{
+            override fun onItemClicked(id: String) {
+                val intent = Intent(this@ListStoryActivity, DetailStoryActivity::class.java)
+                intent.putExtra(DetailStoryActivity.STORY_ID, id)
+                startActivity(intent)
+            }
+
+        })
     }
 
     private fun hideActionBar() {
@@ -54,8 +69,20 @@ class ListStoryActivity : AppCompatActivity() {
             isLoading(false)
             if (responseListStory != null) {
                 if (!responseListStory.error) {
-                    storyAdapter.setData(responseListStory.listStory)
+                    storyAdapter.setData(responseListStory.listStory as List<Story>)
                     storyAdapter.notifyDataSetChanged()
+                }
+                else {
+                    if (responseListStory.message.equals("unauthorized")) {
+                        Toast.makeText(this@ListStoryActivity, "Your token expired, please relogin!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@ListStoryActivity, LoginActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                        finish()
+                    }
+                    else {
+                        Toast.makeText(this@ListStoryActivity, responseListStory.message, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.dicoding.submission_intermediate_1.ui.auth
+package com.dicoding.submission_intermediate_1.ui.auth.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

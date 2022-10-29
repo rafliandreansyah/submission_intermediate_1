@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -11,9 +12,10 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.dicoding.submission_intermediate_1.constant.PREF_TOKEN
 import com.dicoding.submission_intermediate_1.databinding.ActivityLoginBinding
-import com.google.android.material.snackbar.Snackbar
-import org.w3c.dom.Text
+import com.dicoding.submission_intermediate_1.ui.auth.viewmodel.AuthViewModel
+import com.dicoding.submission_intermediate_1.ui.story.ListStoryActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -55,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
+    @Suppress("DEPRECATION")
     private fun login() {
         val email = binding.edLoginEmail.text.toString().trim()
         val password = binding.edLoginPassword.text.toString().trim()
@@ -66,7 +69,13 @@ class LoginActivity : AppCompatActivity() {
                 isLoading(false)
                 binding.btnSignIn.isEnabled = true
                 if (!loginResponse.error) {
-                    Toast.makeText(this, "Berhasil login", Toast.LENGTH_SHORT).show()
+                    PreferenceManager.getDefaultSharedPreferences(this@LoginActivity)
+                        .edit()
+                        .putString(PREF_TOKEN, loginResponse.loginResult?.token)
+                        .apply()
+                    val intent = Intent(this@LoginActivity, ListStoryActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
                 }
                 else {
                     Toast.makeText(this, loginResponse.message, Toast.LENGTH_LONG).show()

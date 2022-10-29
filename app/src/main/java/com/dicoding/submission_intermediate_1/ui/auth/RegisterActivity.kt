@@ -11,7 +11,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.dicoding.submission_intermediate_1.databinding.ActivityRegisterBinding
-import com.dicoding.submission_intermediate_1.model.UserModel
+import com.dicoding.submission_intermediate_1.ui.auth.viewmodel.AuthViewModel
 
 class RegisterActivity : AppCompatActivity() {
 

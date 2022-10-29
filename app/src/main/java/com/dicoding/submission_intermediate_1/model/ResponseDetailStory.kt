@@ -8,7 +8,7 @@ data class ResponseDetailStory(
 	val error: Boolean? = null,
 
 	@field:SerializedName("message")
-	val message: String? = null,
+	val message: String,
 
 	@field:SerializedName("story")
 	val story: Story? = null

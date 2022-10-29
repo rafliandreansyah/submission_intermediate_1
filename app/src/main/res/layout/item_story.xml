@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_item_story"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="2dp"
@@ -32,7 +33,7 @@
             android:fontFamily="@font/work_sans_semi_bold"
             android:textColor="@color/color_dark_grey"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/img_story"
             tools:text="Date Created" />
 
         <TextView

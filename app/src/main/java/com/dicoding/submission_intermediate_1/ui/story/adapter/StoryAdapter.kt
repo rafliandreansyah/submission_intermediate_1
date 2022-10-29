@@ -1,4 +1,4 @@
-package com.dicoding.submission_intermediate_1.ui.story
+package com.dicoding.submission_intermediate_1.ui.story.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,10 +10,15 @@ import com.dicoding.submission_intermediate_1.util.changeFormatDate
 
 class StoryAdapter: RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
 
-    private lateinit var listStory: List<Story>
+    private var listStory: List<Story>? = null
+    private lateinit var onItemClickListener: OnItemClickListener
 
     fun setData(listStory: List<Story>) {
         this.listStory = listStory
+    }
+
+    fun setOnItemClicked(onItemClickListener: OnItemClickListener) {
+        this.onItemClickListener = onItemClickListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder {
@@ -21,10 +26,10 @@ class StoryAdapter: RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
-        holder.bindData(listStory[position])
+        holder.bindData(listStory?.get(position) ?: Story())
     }
 
-    override fun getItemCount(): Int = if (listStory != null)  listStory.size else 0
+    override fun getItemCount(): Int = if (listStory != null)  listStory!!.size else 0
 
     inner class StoryViewHolder(private val view: ItemStoryBinding): RecyclerView.ViewHolder(view.root){
         fun bindData(story: Story) {
@@ -36,8 +41,16 @@ class StoryAdapter: RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
                 Glide.with(this.root)
                     .load(story.photoUrl)
                     .into(imgStory)
+
+                cvItemStory.setOnClickListener {
+                    onItemClickListener.onItemClicked(story.id as String)
+                }
             }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClicked(id: String)
     }
 
 }
