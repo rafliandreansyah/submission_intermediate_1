@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -19,6 +20,7 @@ import com.dicoding.submission_intermediate_1.constant.IS_CAMERA_BACK
 import com.dicoding.submission_intermediate_1.databinding.ActivityCameraXactivityBinding
 import com.dicoding.submission_intermediate_1.ui.story.CreateStoryActivity.Companion.CAMERA_X_RESULT
 import com.dicoding.submission_intermediate_1.util.createFile
+import com.dicoding.submission_intermediate_1.util.rotateFile
 
 class CameraXActivity : AppCompatActivity() {
 
@@ -103,13 +105,16 @@ class CameraXActivity : AppCompatActivity() {
         imageCapture.takePicture(outputOption, ContextCompat.getMainExecutor(this), object : ImageCapture.OnImageSavedCallback {
             override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                 val intent = Intent()
-                intent.putExtra(CAMERA_X_FILE, photoFile)
+                val fileRotate = rotateFile(photoFile, cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA, this@CameraXActivity)
+                intent.putExtra(CAMERA_X_FILE, fileRotate)
                 intent.putExtra(IS_CAMERA_BACK, cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
                 setResult(CAMERA_X_RESULT, intent)
                 finish()
             }
 
             override fun onError(exception: ImageCaptureException) {
+                exception.printStackTrace()
+                Log.e(CameraXActivity::class.java.simpleName, "Error ${exception.message}")
                 Toast.makeText(this@CameraXActivity, "Gagal mengambil gambar", Toast.LENGTH_SHORT).show()
             }
 

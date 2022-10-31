@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
+import android.preference.PreferenceManager
+import android.util.Log
+import android.view.*
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.submission_intermediate_1.R
+import com.dicoding.submission_intermediate_1.constant.PREF_TOKEN
 import com.dicoding.submission_intermediate_1.databinding.ActivityListStoryBinding
 import com.dicoding.submission_intermediate_1.model.Story
 import com.dicoding.submission_intermediate_1.ui.auth.LoginActivity
@@ -64,6 +66,22 @@ class ListStoryActivity : AppCompatActivity() {
                 storyViewModel.getAllStory()
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_logout, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.logout) {
+            PreferenceManager.getDefaultSharedPreferences(this).edit().clear().apply()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setData(){

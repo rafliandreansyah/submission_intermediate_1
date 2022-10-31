@@ -59,12 +59,12 @@ class CreateStoryActivity : AppCompatActivity() {
 
             imgFile = reduceFileImage(myFile)
 
-            val rotateBitmap = rotateBitmap(
+            /*val rotateBitmap = rotateBitmap(
                 BitmapFactory.decodeFile(myFile.path),
                 isCameraBack
-            )
+            )*/
 
-            binding.imgAddStory.setImageBitmap(rotateBitmap)
+            binding.imgAddStory.setImageBitmap(BitmapFactory.decodeFile(myFile.path))
 
         }
     }

@@ -35,4 +35,5 @@
     <string name="txt_close_dialog">Close dialog</string>
     <string name="txt_camera">Camera</string>
     <string name="txt_gallery">Gallery</string>
+    <string name="txt_logout">Logout</string>
 </resources>

@@ -95,3 +95,27 @@ fun reduceFileImage(file: File): File {
     bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
     return file
 }
+
+fun rotateFile(fileInput: File, isBackCamera: Boolean = false, context: Context): File {
+    val file: File
+    val bitmapRotated = rotateBitmap(BitmapFactory.decodeFile(fileInput.path), isBackCamera)
+    try {
+        file = createTempFile(context)
+
+        //Convert bitmap to byte array
+        val bos = ByteArrayOutputStream()
+        bitmapRotated.compress(Bitmap.CompressFormat.PNG, 0, bos)
+        val bitmapData = bos.toByteArray()
+
+        //write the bytes in file
+        val fos = FileOutputStream(file)
+        fos.write(bitmapData)
+        fos.flush()
+        fos.close()
+
+        return file
+    }catch (e: Exception) {
+        e.printStackTrace()
+        return fileInput
+    }
+}
