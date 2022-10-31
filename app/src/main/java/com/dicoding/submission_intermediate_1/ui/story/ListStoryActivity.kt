@@ -27,8 +27,7 @@ class ListStoryActivity : AppCompatActivity() {
         binding = ActivityListStoryBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        hideActionBar()
+        supportActionBar?.title = "List Story"
         initRecycleview()
 
         isLoading(true)
@@ -41,6 +40,10 @@ class ListStoryActivity : AppCompatActivity() {
             storyViewModel.getAllStory()
         }
 
+        binding.fabAddStory.setOnClickListener {
+            startActivity(Intent(this, CreateStoryActivity::class.java))
+        }
+
         storyAdapter.setOnItemClicked(object : StoryAdapter.OnItemClickListener{
             override fun onItemClicked(id: String) {
                 val intent = Intent(this@ListStoryActivity, DetailStoryActivity::class.java)
@@ -51,17 +54,16 @@ class ListStoryActivity : AppCompatActivity() {
         })
     }
 
-    private fun hideActionBar() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
+    override fun onResume() {
+        super.onResume()
+
+        if (intent.extras != null){
+            val isRestart = intent.getBooleanExtra("reload", false)
+            if (isRestart) {
+                isLoading(true)
+                storyViewModel.getAllStory()
+            }
         }
-        supportActionBar?.hide()
     }
 
     private fun setData(){

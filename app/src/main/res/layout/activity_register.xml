@@ -23,14 +23,14 @@
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/work_sans_bold"
                 android:lineHeight="35dp"
-                android:text="Daftarkan Dirimu\nDan Bagikan Ceritamu"
+                android:text="@string/txt_daftarkan_dirimu_ndan_bagikan_ceritamu"
                 android:textColor="@color/color_black"
                 android:textSize="26sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nama"
+                android:text="@string/txt_label_nama"
                 android:layout_marginTop="40dp"
                 android:textAlignment="textStart"
                 android:textColor="@color/color_black"/>
@@ -42,12 +42,12 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edit_text"
                 android:textSize="12sp"
-                android:hint="Nama..."/>
+                android:hint="@string/txt_hint_nama"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="@string/txt_label_email"
                 android:layout_marginTop="16dp"
                 android:textAlignment="textStart"
                 android:textColor="@color/color_black"/>
@@ -62,7 +62,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Password"
+                android:text="@string/txt_label_password"
                 android:layout_marginTop="16dp"
                 android:textAlignment="textStart"
                 android:textColor="@color/color_black"/>
@@ -72,13 +72,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Masukkan password..."
+                android:hint="@string/txt_hint_masukkan_password"
                 android:background="@drawable/bg_edit_text" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Konfirmasi Password"
+                android:text="@string/txt_label_konfirmasi_password"
                 android:layout_marginTop="16dp"
                 android:textAlignment="textStart"
                 android:textColor="@color/color_black"/>
@@ -88,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Konfirmasi password..."
+                android:hint="@string/txt_hint_konfirmasi_password"
                 android:background="@drawable/bg_edit_text" />
 
             <com.dicoding.submission_intermediate_1.ui.custom_ui.CustomButton
@@ -96,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Registrasi"
+                android:text="@string/txt_label_btn_registrasi"
                 android:enabled="false" />
 
             <TextView
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/work_sans_light"
-                android:text="- Atau -"
+                android:text="@string/txt_atau"
                 android:layout_gravity="center_horizontal"
                 android:textAlignment="center"
                 android:textColor="@color/color_dark_grey" />
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/work_sans_bold"
-                android:text="Login"
+                android:text="@string/txt_login"
                 android:layout_gravity="center_horizontal"
                 android:textAlignment="center"
                 android:layout_marginBottom="30dp"

@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.dicoding.submission_intermediate_1.R
 import com.dicoding.submission_intermediate_1.databinding.ItemStoryBinding
 import com.dicoding.submission_intermediate_1.model.Story
 import com.dicoding.submission_intermediate_1.util.changeFormatDate
@@ -40,6 +42,9 @@ class StoryAdapter: RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
 
                 Glide.with(this.root)
                     .load(story.photoUrl)
+                    .placeholder(R.drawable.img_placeholder)
+                    .error(R.drawable.image_error)
+                    .transition(DrawableTransitionOptions.withCrossFade())
                     .into(imgStory)
 
                 cvItemStory.setOnClickListener {

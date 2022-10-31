@@ -1,9 +1,11 @@
 package com.dicoding.submission_intermediate_1.api
 
+import com.dicoding.submission_intermediate_1.constant.TIMEOUT_REQUEST
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object ApiConfig {
 
@@ -12,6 +14,9 @@ object ApiConfig {
 
         val client = OkHttpClient
             .Builder()
+            .connectTimeout(TIMEOUT_REQUEST, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_REQUEST, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT_REQUEST, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
             .build()
 

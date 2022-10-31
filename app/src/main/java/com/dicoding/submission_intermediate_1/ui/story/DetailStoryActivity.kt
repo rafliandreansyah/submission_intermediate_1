@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
@@ -35,6 +36,7 @@ class DetailStoryActivity : AppCompatActivity() {
             id = intent.getStringExtra(STORY_ID).toString()
         }
 
+        isLoading(true)
         storyViewModel.getDetailStory(id)
         setDetailStory()
     }
@@ -49,6 +51,7 @@ class DetailStoryActivity : AppCompatActivity() {
     private fun setDetailStory() {
         storyViewModel.detailStoryData.observe(this) { detailStoryResponse ->
             if (detailStoryResponse != null) {
+                isLoading(false)
                 if (detailStoryResponse.error == false) {
                     with(binding) {
                         Glide.with(this@DetailStoryActivity)
@@ -74,4 +77,13 @@ class DetailStoryActivity : AppCompatActivity() {
 
         }
     }
+
+    private fun isLoading(isL: Boolean) {
+        if (isL) {
+            binding.rlLoading.visibility = View.VISIBLE
+        } else {
+            binding.rlLoading.visibility = View.GONE
+        }
+    }
+
 }

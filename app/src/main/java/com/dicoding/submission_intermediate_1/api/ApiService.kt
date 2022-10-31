@@ -30,6 +30,6 @@ interface ApiService {
 
     @Multipart
     @POST("stories")
-    fun addStory(@Header("Authorization") authorization: String, @Part description: RequestBody, @Part file: MultipartBody.Part): Call<ResponseGeneral>
+    fun addStory(@Header("Authorization") authorization: String, @Part("description") description: RequestBody, @Part file: MultipartBody.Part): Call<ResponseGeneral>
 
 }

@@ -38,6 +38,7 @@ class StoryViewModel(application: Application) : AndroidViewModel(application) {
 
     fun addStory(desc: String, file: File) {
         try {
+            addStoryData.value = null
             val bearer = "Bearer ${token as String}"
             val description = createPartFromString(desc)
             val storyFile = prepareFilePart("photo", file)
@@ -46,21 +47,39 @@ class StoryViewModel(application: Application) : AndroidViewModel(application) {
                     call: Call<ResponseGeneral>,
                     response: Response<ResponseGeneral>
                 ) {
-                    TODO("Not yet implemented")
+                    if (response.isSuccessful) {
+                        if (response.body()?.error == false) {
+                            addStoryData.postValue(response.body())
+                        }
+                        else {
+                            if (response.body()?.message != null && response.body()!!.message.isNotEmpty()) {
+                                addStoryData.postValue(ResponseGeneral(true, response.message()))
+                            } else {
+                                addStoryData.postValue(ResponseGeneral(true, "error get data"))
+                            }
+                        }
+                    } else if (response.code() == 401) {
+                        addStoryData.postValue(ResponseGeneral(true, "unauthorized"))
+                    } else {
+                        addStoryData.postValue(ResponseGeneral(true, "error get data"))
+                    }
                 }
 
                 override fun onFailure(call: Call<ResponseGeneral>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    t.printStackTrace()
+                    addStoryData.postValue(ResponseGeneral(true, "error get data"))
                 }
 
             })
         }catch (e: Exception) {
+            addStoryData.postValue(ResponseGeneral(true, "error convert data"))
             e.printStackTrace()
         }
     }
 
     fun getAllStory() {
         try {
+            listStoryData.value = null
             val bearer = "Bearer ${token as String}"
             ApiConfig.getApiService().getListStory(bearer).enqueue(object : Callback<ResponseListStory>{
                 override fun onResponse(
@@ -98,7 +117,7 @@ class StoryViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getDetailStory(id: String) {
         try {
-
+            detailStoryData.value = null
             val bearer = "Bearer ${token as String}"
 
             ApiConfig.getApiService().getDetailStory(bearer, id).enqueue(object: Callback<ResponseDetailStory>{
