@@ -91,7 +91,7 @@
 
 
     <com.dicoding.submission_intermediate_1.ui.custom_ui.CustomButton
-        android:id="@+id/btn_add_story"
+        android:id="@+id/button_add"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"

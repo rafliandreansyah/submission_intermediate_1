@@ -1,5 +1,7 @@
 package com.dicoding.submission_intermediate_1.ui.auth
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +33,8 @@ class LoginActivity : AppCompatActivity() {
         hideActionBar()
         isLoading(false)
 
+        playAnimation()
+
         binding.edLoginEmail.addTextChangedListener(watcher())
         binding.edLoginPassword.addTextChangedListener(watcher())
 
@@ -55,6 +59,24 @@ class LoginActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
+    }
+
+    private fun playAnimation() {
+        with(binding) {
+            val titleLogin = ObjectAnimator.ofFloat(txtTitleLogin, View.ALPHA, 1f).setDuration(500)
+            val titleEmail = ObjectAnimator.ofFloat(txtTitleEmail, View.ALPHA, 1f).setDuration(500)
+            val edEmail = ObjectAnimator.ofFloat(edLoginEmail, View.ALPHA, 1f).setDuration(500)
+            val titlePass = ObjectAnimator.ofFloat(txtTitlePassword, View.ALPHA, 1f).setDuration(500)
+            val edPass = ObjectAnimator.ofFloat(edLoginPassword, View.ALPHA, 1f).setDuration(500)
+            val btnSignIn = ObjectAnimator.ofFloat(btnSignIn, View.ALPHA, 1f).setDuration(500)
+            val titleAtau = ObjectAnimator.ofFloat(txtAtau, View.ALPHA, 1f).setDuration(500)
+            val titleRegister = ObjectAnimator.ofFloat(txtRegister, View.ALPHA, 1f).setDuration(500)
+
+            AnimatorSet().apply {
+                playSequentially(titleLogin, titleEmail, edEmail, titlePass, edPass, btnSignIn, titleAtau, titleRegister)
+                start()
+            }
+        }
     }
 
     @Suppress("DEPRECATION")

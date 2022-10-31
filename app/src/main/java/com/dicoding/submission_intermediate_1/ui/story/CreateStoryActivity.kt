@@ -110,7 +110,7 @@ class CreateStoryActivity : AppCompatActivity() {
 
             }
 
-            btnAddStory.setOnClickListener {
+            buttonAdd.setOnClickListener {
                 validation()
             }
         }
@@ -137,7 +137,7 @@ class CreateStoryActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                binding.btnAddStory.isEnabled =
+                binding.buttonAdd.isEnabled =
                     binding.edAddDescription.text.toString().trim().isNotEmpty()
             }
 
