@@ -38,7 +38,7 @@ class StoryAdapter: RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
             with(view) {
                 txtDate.text = story.createdAt?.let { changeFormatDate(it) }
                 txtDescription.text = story.description
-                txtCreatedBy.text = story.description
+                txtCreatedBy.text = story.name
 
                 Glide.with(this.root)
                     .load(story.photoUrl)
