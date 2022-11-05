@@ -46,7 +46,7 @@ class RegisterActivity : AppCompatActivity() {
         val password = binding.edRegisterPassword.text.toString().trim()
         val confirmPassword = binding.edRegisterPasswordConfirm.text.toString()
 
-        if (password.equals(confirmPassword)) {
+        if (password != confirmPassword) {
             binding.edRegisterPasswordConfirm.error = "Password tidak sama"
             Toast.makeText(this, "Password tidak sama", Toast.LENGTH_SHORT).show()
             return
