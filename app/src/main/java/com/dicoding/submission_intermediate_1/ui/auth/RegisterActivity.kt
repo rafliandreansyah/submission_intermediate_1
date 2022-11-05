@@ -61,6 +61,7 @@ class RegisterActivity : AppCompatActivity() {
                 isLoading(false)
                 if (!registerResponse.error) {
                     Toast.makeText(this, "Berhasil daftar", Toast.LENGTH_LONG).show()
+                    finish()
                 }
                 else {
                     Toast.makeText(this, registerResponse.message, Toast.LENGTH_LONG).show()
